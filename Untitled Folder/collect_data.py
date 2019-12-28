@@ -6,3 +6,4 @@ dataopen = open(datapath)
 # s = open("data.csv")
 datapd = pd.read_csv(datapath)
 print(datapd.head)
+#quick check of git
