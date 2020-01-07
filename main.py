@@ -1,10 +1,17 @@
-import getData
+import getDataSubjects
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
-results = getData.data
+subject_data = getDataSubjects.data
+#subject_results = getDataSubjects.subjects
 corpus = []
-for i in range(len(results)):
-    corpus.append(results[i][0])
+
+#for i in 
+
+# add all abstracts to the corpus list
+for i in range(len(subject_data)):
+    corpus.append(subject_data[i][0])
+
+# produce tfidf vectorizer and transform the corpus to vectors
 vectorizer = TfidfVectorizer(use_idf=True)
 tfidf_result = vectorizer.fit_transform(corpus)
 

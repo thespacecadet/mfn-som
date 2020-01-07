@@ -7,7 +7,7 @@ cursor = cnx.cursor()
 
 # enter into the query "test3" for the full data, and "dataset10" for a 10 row sample
 query = "SELECT project_abstract,min(id),min(title) \
-        FROM dataset10 WHERE project_abstract NOT LIKE '%Keine Zusammenfassung%' \
+        FROM test3 WHERE project_abstract NOT LIKE '%Keine Zusammenfassung%' \
                                 GROUP BY project_abstract"
 
 
