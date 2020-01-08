@@ -1,15 +1,7 @@
-# som_iris.py
-# SOM for Iris dataset
-# Anaconda3 5.2.0 (Python 3.6.5)
 
-# ==================================================================
 
 import numpy as np
 import matplotlib.pyplot as plt
-# note: if this fails, try >pip uninstall matplotlib
-# and then >pip install matplotlib
-
-f = open("/home/spacecadet/projects/soma/Untitled Folder/iris_data_012.txt")
 
 def closest_node(data, t, map, m_rows, m_cols):
   # (row,col) of map node closest to data[t]
@@ -39,11 +31,11 @@ def most_common(lst, n):
 
 # ==================================================================
 
-def main():
+def main(tfidf_result,dimensions):
   # 0. get started
   np.random.seed(1)
-  Dim = 4
-  Rows = 50; Cols = 50
+  Dim = dimensions
+  Rows = 30; Cols = 30
   RangeMax = Rows + Cols
   LearnMax = 0.5
   StepsMax = 3000
@@ -52,13 +44,14 @@ def main():
   print("\nLoading Iris data into memory \n")
   data_file = "./Data/iris_data_012.txt"
   
-  # create array of data
-  data_x = np.loadtxt(data_file, delimiter=",", usecols=range(0,4),
-    dtype=np.float64)
+  data_x = np.array(tfidf_result)
+#   # create array of data
+#   data_x = np.loadtxt(data_file, delimiter=",", usecols=range(0,Dim),
+#     dtype=np.float64)
   
-  # create array of labels
-  data_y = np.loadtxt(data_file, delimiter=",", usecols=[4],
-    dtype=np.int)
+#   # create array of labels
+#   data_y = np.loadtxt(data_file, delimiter=",", usecols=[Dim],
+#     dtype=np.int)
   
   # 2. construct the SOM
   print("Constructing a 30x30 SOM from the iris data")
