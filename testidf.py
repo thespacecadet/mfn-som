@@ -11,13 +11,14 @@ docs=["the house had a tiny little mouse",
       "the end of the mouse story"
      ] 
 #instantiate CountVectorizer()
-cv=CountVectorizer()
+cv=TfidfVectorizer(use_idf=True,min_df=2,max_df=10)
  
 # this steps generates word counts for the words in your docs
 word_count_vector=cv.fit_transform(docs)
 
 
 vectorizer = TfidfVectorizer(use_idf=True)
+vectorizer1 = TfidfVectorizer(use_idf=True,min_df=2,max_df=10)
 tfidf_result = vectorizer.fit_transform(docs)
 
 # get the first vector out (for the first document)

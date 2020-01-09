@@ -1,4 +1,5 @@
-#similar to getData, only this script delivers data per subject
+# test data - not part of the program.
+#tests tfidf alone
 import mysql.connector
 
 cnx = mysql.connector.connect(user='spacecadet', password='3smashing3',
@@ -13,36 +14,31 @@ query = "select * from (SELECT project_abstract,min(id) as pro_id \
     GROUP BY project_abstract) as a \
     LEFT JOIN (SELECT project_id, subject_area from ikon_som.subject_area) as c \
     ON c.project_id = a.pro_id \
-    LIMIT 200;"
+    LIMIT 5000;"
 
 
 cursor.execute(query)
 data = cursor.fetchall()
 
 abstract_subject = {}
-weight_counter = {}
 
 for paper_index in range(len(data)):
     if data[paper_index][3] in abstract_subject:
         abstract_subject[data[paper_index][3]] += ' ' + data[paper_index][0]
-        weight_counter[data[paper_index][3]] += 1
     else:
         abstract_subject[data[paper_index][3]] =  data[paper_index][0]
-        weight_counter[data[paper_index][3]] = 1
-    #print (paper_index)
+    print (paper_index)
 
 x = 1
-
-
-# abstract_subject = {}
-# abstract_subject['a'] = 'bla'
-# x = "blue"
-# y = ['a','b']
-# for i in range(len(y)):
-#     if y[i] in abstract_subject:
-#         abstract_subject[y[i]] += ' ' + x 
-#     else:
-#         abstract_subject[y[i]] =  x 
+abstract_subject = {}
+abstract_subject['a'] = 'bla'
+x = "blue"
+y = ['a','b']
+for i in range(len(y)):
+    if y[i] in abstract_subject:
+        abstract_subject[y[i]] += ' ' + x 
+    else:
+        abstract_subject[y[i]] =  x 
 
 #abstract_subject['a'] += ' ' + x
 
@@ -58,6 +54,4 @@ y = 2
  #   temp = [key,value]
  #   dictlist.append(temp)   
 
-#print(data)
-
-cnx.close()
+print(data)
