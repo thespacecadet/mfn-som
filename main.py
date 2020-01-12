@@ -1,6 +1,8 @@
 import getDataSubjects
 import pandas as pd
+from som import *
 from sklearn.feature_extraction.text import TfidfVectorizer
+
 subject_data = getDataSubjects.data
 abstract_subject = getDataSubjects.abstract_subject
 #subject_results = getDataSubjects.subjects
@@ -28,6 +30,7 @@ term_list = vectorizer.get_feature_names()
 
 # get the first vector out (for the first document)
 first_vector_tfidfvectorizer=tfidf_result[0]
+som(tfidf_lists,term_list,len(term_list))
  
 # place tf-idf values in a pandas data frame
 df = pd.DataFrame(first_vector_tfidfvectorizer.T.todense(), index=vectorizer.get_feature_names(), columns=["tfidf"])

@@ -31,7 +31,7 @@ def most_common(lst, n):
 
 # ==================================================================
 
-def main(tfidf_result,dimensions):
+def som(tfidf_result,tfidf_labels,dimensions):
   # 0. get started
   np.random.seed(1)
   Dim = dimensions
@@ -45,6 +45,7 @@ def main(tfidf_result,dimensions):
   data_file = "./Data/iris_data_012.txt"
   
   data_x = np.array(tfidf_result)
+  data_y = np.array(tfidf_labels)
 #   # create array of data
 #   data_x = np.loadtxt(data_file, delimiter=",", usecols=range(0,Dim),
 #     dtype=np.float64)
@@ -118,5 +119,5 @@ def main(tfidf_result,dimensions):
 
 # ==================================================================
 
-if __name__=="__main__":
-  main()
+#if __name__=="__main__":
+#  main()
