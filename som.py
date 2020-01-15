@@ -29,13 +29,21 @@ def most_common(lst, n):
     counts[lst[i]] += 1
   return np.argmax(counts)
 
+def most_common_replacement(lst):
+  if len(lst) > 1:
+    print ("more than one item in point!")
+  if len(lst) >= 1:
+    return lst[0]
+  else:
+    return -1
+
 # ==================================================================
 
 def som(tfidf_result,tfidf_labels,dimensions):
   # 0. get started
   np.random.seed(1)
   Dim = dimensions
-  Rows = 30; Cols = 30
+  Rows = 50; Cols = 50
   RangeMax = Rows + Cols
   LearnMax = 0.5
   StepsMax = 3000
@@ -93,8 +101,8 @@ def som(tfidf_result,tfidf_labels,dimensions):
   print("U-Matrix constructed \n")
 
   # display U-Matrix
-  plt.imshow(u_matrix, cmap='gray')  # black = close = clusters
-  plt.show()
+  #plt.imshow(u_matrix, cmap='gray')  # black = close = clusters
+  #plt.show()
 
   # 4. because the data has labels, another possible visualization:
   # associate each data label with a map node
@@ -106,16 +114,17 @@ def som(tfidf_result,tfidf_labels,dimensions):
 
   for t in range(len(data_x)):
     (m_row, m_col) = closest_node(data_x, t, map, Rows, Cols)
-    mapping[m_row][m_col].append(data_y[t])
+    mapping[m_row][m_col].append(t)
 
   label_map = np.zeros(shape=(Rows,Cols), dtype=np.int)
   for i in range(Rows):
     for j in range(Cols):
-      label_map[i][j] = most_common(mapping[i][j], 3)
- 
-  plt.imshow(label_map, cmap=plt.cm.get_cmap('terrain_r', 4))
-  plt.colorbar()
-  plt.show()
+      label_map[i][j] = most_common_replacement(mapping[i][j])
+  som_data = [label_map,mapping]
+  return som_data
+  #plt.imshow(label_map, cmap=plt.cm.get_cmap('terrain_r', 4))
+  #plt.colorbar()
+  #plt.show()
 
 # ==================================================================
 

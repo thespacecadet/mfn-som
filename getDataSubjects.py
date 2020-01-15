@@ -13,7 +13,7 @@ query = "select * from (SELECT project_abstract,min(id) as pro_id \
     GROUP BY project_abstract) as a \
     LEFT JOIN (SELECT project_id, subject_area from ikon_som.subject_area) as c \
     ON c.project_id = a.pro_id \
-    LIMIT 200;"
+    LIMIT 250"
 
 
 cursor.execute(query)
@@ -32,6 +32,7 @@ for paper_index in range(len(data)):
     #print (paper_index)
 
 x = 1
+
 
 
 # abstract_subject = {}
