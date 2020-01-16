@@ -21,8 +21,3 @@ def create_map(filename,som_map,subject_lists,weights):
     rr = 23
 
     return f
-
-#id	label	x	y	weight<Amount of Abstracts>
-
-    
-print("bla")

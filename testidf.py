@@ -1,3 +1,5 @@
+#testing tf-idf on small scale data. will eventually be deleted from the repository
+
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer

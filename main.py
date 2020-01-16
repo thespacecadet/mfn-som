@@ -1,4 +1,5 @@
 import getDataSubjects
+import getDataSubjectsWithInstitute
 import json
 import create_map_file
 import pandas as pd
@@ -13,18 +14,20 @@ with open("Data/stopwords_eng.json") as json_file:
     english_stopwords = json.load(json_file)
 all_stopwords = german_stopwords + english_stopwords
 
-subject_data = getDataSubjects.data
-abstract_subject = getDataSubjects.abstract_subject
-weight_counter = getDataSubjects.weight_counter
+#get subject data WITHOUT institute
+#subject_data = getDataSubjects.data
+#abstract_subject = getDataSubjects.abstract_subject
+#weight_counter = getDataSubjects.weight_counter
+
+#get subject data WITH institute
+subject_data = getDataSubjectsWithInstitute.data
+abstract_subject = getDataSubjectsWithInstitute.abstract_subject
+weight_counter = getDataSubjectsWithInstitute.weight_counter
 
 #convert abstract subjects to list
 # index 0 in each item is the subject name, index 1 is the addition of all abstracts
 abstract_subject_list = []
 abstract_subject_list = [[k, v] for k, v in abstract_subject.items()] 
-
-#for key, value in abstract_subject.iteritems():
- #   temp = [key,value]
-  #  abstract_subject_list.append(temp)
 
 corpus = []
 
@@ -51,12 +54,12 @@ first_vector_tfidfvectorizer=tfidf_result[0]
 som_data = som(tfidf_lists,term_list,len(term_list))
 som_map = som_data[0]
 #process data and create map file 
-filename = "blae1"
+filename = "mfn"
 s = create_map_file.create_map(filename,som_map,abstract_subject_list,weight_counter)
 
 
 # place tf-idf values in a pandas data frame
-df = pd.DataFrame(first_vector_tfidfvectorizer.T.todense(), index=vectorizer.get_feature_names(), columns=["tfidf"])
-df1 = df.sort_values(by=["tfidf"],ascending=False)
-print(df1)
-y = 4
+#df = pd.DataFrame(first_vector_tfidfvectorizer.T.todense(), index=vectorizer.get_feature_names(), columns=["tfidf"])
+#df1 = df.sort_values(by=["tfidf"],ascending=False)
+#print(df1)
+#y = 4

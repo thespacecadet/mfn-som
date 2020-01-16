@@ -1,5 +1,6 @@
+#testing aggregation of data to per subject. will eventually be deleted from the repository
 # test data - not part of the program.
-#tests tfidf alone
+
 import mysql.connector
 
 cnx = mysql.connector.connect(user='spacecadet', password='3smashing3',
