@@ -13,7 +13,7 @@ query = "select * from (SELECT project_abstract,min(id) as pro_id \
     GROUP BY project_abstract) as a \
     LEFT JOIN (SELECT project_id, subject_area from ikon_som.subject_area) as c \
     ON c.project_id = a.pro_id \
-    LIMIT 250"
+    LIMIT 10000"
 
 
 cursor.execute(query)

@@ -1,11 +1,20 @@
+import time
+#time gathering data
+start = time.time()
 import getDataSubjects
-import getDataSubjectsWithInstitute
+end = time.time()
+print("gathering data time:")
+print(end - start)
+#import getDataSubjectsWithInstitute
 import json
 import create_map_file
 import pandas as pd
 from som import *
 from sklearn.feature_extraction.text import TfidfVectorizer
 
+
+#time processing
+start = time.time()
 
 # make lists of german stopwords, english stopwords, and one list of all stopwords together
 with open("Data/stopwords_de.json") as json_file:
@@ -15,14 +24,14 @@ with open("Data/stopwords_eng.json") as json_file:
 all_stopwords = german_stopwords + english_stopwords
 
 #get subject data WITHOUT institute
-#subject_data = getDataSubjects.data
-#abstract_subject = getDataSubjects.abstract_subject
-#weight_counter = getDataSubjects.weight_counter
+subject_data = getDataSubjects.data
+abstract_subject = getDataSubjects.abstract_subject
+weight_counter = getDataSubjects.weight_counter
 
 #get subject data WITH institute
-subject_data = getDataSubjectsWithInstitute.data
-abstract_subject = getDataSubjectsWithInstitute.abstract_subject
-weight_counter = getDataSubjectsWithInstitute.weight_counter
+#subject_data = getDataSubjectsWithInstitute.data
+#abstract_subject = getDataSubjectsWithInstitute.abstract_subject
+#weight_counter = getDataSubjectsWithInstitute.weight_counter
 
 #convert abstract subjects to list
 # index 0 in each item is the subject name, index 1 is the addition of all abstracts
@@ -34,6 +43,14 @@ corpus = []
 # add all abstracts to the corpus list.
 for i in range(len(abstract_subject_list)):
     corpus.append(abstract_subject_list[i][1])
+
+end = time.time()
+print("processing data time:")
+print(end - start)
+
+#time tfidf
+start = time.time()
+
 
 # produce tfidf vectorizer and transform the corpus to vectors
 vectorizer = TfidfVectorizer(use_idf=True,min_df=2,max_df=10, stop_words=all_stopwords)
@@ -51,11 +68,24 @@ term_list = vectorizer.get_feature_names()
 
 # get the first vector out (for the first document)
 first_vector_tfidfvectorizer=tfidf_result[0]
+
+end = time.time()
+print("TFIDF time:")
+print(end - start)
+
+
+#SOM time
+start = time.time()
+
 som_data = som(tfidf_lists,term_list,len(term_list))
 som_map = som_data[0]
 #process data and create map file 
-filename = "mfn"
+filename = "mfn-10k-test"
 s = create_map_file.create_map(filename,som_map,abstract_subject_list,weight_counter)
+
+end = time.time()
+print("SOM + creating file time:")
+print(end - start)
 
 
 # place tf-idf values in a pandas data frame

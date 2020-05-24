@@ -51,7 +51,6 @@ def som(tfidf_result,tfidf_labels,dimensions):
   StepsMax = 3000
 
   # 1. load data
-  print("\nLoading Iris data into memory \n")
   data_file = "./Data/iris_data_012.txt"
   
   data_x = np.array(tfidf_result)
